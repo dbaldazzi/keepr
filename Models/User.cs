@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
-namespace keepr.Models
+namespace Keepr.Models
 {
 
-    public class UserLogin // HELPER MODEL
+    public class UserSignIn // HELPER MODEL
     {
         [Required]
         [EmailAddress]
@@ -34,15 +34,10 @@ namespace keepr.Models
     public class User
     {
         public string Id { get; set; }
-        public bool Active { get; set; } = true;
         public string Username { get; set; }
-
-        [Required]
         [EmailAddress]
         public string Email { get; set; }
-
-        [Required]
-        internal string Hash { get; set; }
+        public string Hash { get; set; }
         internal ClaimsPrincipal _principal { get; private set; }
 
         internal void SetClaims()

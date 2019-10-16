@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using keepr.Models;
-using keepr.Repositories;
+using Keepr.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +12,10 @@ namespace Keepr.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserRepository _repo;
-        public AccountController(UserRepository repo)
+        private readonly AccountService _as;
+        public AccountController(AccountService accService)
         {
-            _repo = repo;
+            _as = accService;
         }
 
         [HttpPost("Register")]
@@ -26,7 +23,7 @@ namespace Keepr.Controllers
         {
             try
             {
-                User user = _repo.Register(creds);
+                User user = _as.Register(creds);
                 if (user == null) { Unauthorized("Invalid Credentials"); }
                 user.SetClaims();
                 await HttpContext.SignInAsync(user._principal);
@@ -39,12 +36,11 @@ namespace Keepr.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<User>> Login([FromBody] UserLogin creds)
+        public async Task<ActionResult<User>> Login([FromBody] UserSignIn creds)
         {
             try
             {
-                User user = _repo.Login(creds);
-                if (user == null) { Unauthorized("Invalid Credentials"); }
+                User user = _as.SignIn(creds);
                 user.SetClaims();
                 await HttpContext.SignInAsync(user._principal);
                 return Ok(user);
@@ -76,16 +72,14 @@ namespace Keepr.Controllers
         {
             try
             {
-                var id = HttpContext.User.FindFirstValue("Id"); // THIS IS HOW YOU GET THE ID of the currently logged in user
-                var user = _repo.GetUserById(id);
-                if (user == null) { 
-                    await HttpContext.SignOutAsync();
-                    throw new Exception("User not logged In"); 
-                }
+                //NOTE THIS IS HOW YOU GET THE ID of the currently logged in user
+                var id = HttpContext.User.FindFirstValue("Id");
+                var user = _as.GetUserById(id);
                 return Ok(user);
             }
             catch (Exception e)
             {
+                await HttpContext.SignOutAsync();
                 return Unauthorized(e.Message);
             }
         }

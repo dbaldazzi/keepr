@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using keepr.Repositories;
+using Keepr.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -56,8 +56,9 @@ namespace Keepr
 
             services.AddMvc();
 
-            services.AddTransient<IDbConnection>(x => CreateDBContext());
-            services.AddTransient<UserRepository>();
+            services.AddScoped<IDbConnection>(x => CreateDBContext());
+            services.AddTransient<AccountRepository>();
+            services.AddTransient<AccountService>();
 
 
         }
