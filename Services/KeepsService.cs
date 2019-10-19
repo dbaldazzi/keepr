@@ -51,6 +51,11 @@ namespace keepr.Services
       return keep;
     }
 
+    internal object GetKeep(int id)
+    {
+      throw new NotImplementedException();
+    }
+
     public string Delete(int id)
     {
       Keep exists = _repo.Get(id);
