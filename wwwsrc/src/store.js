@@ -36,7 +36,7 @@ export default new Vuex.Store({
     setKeeps(state, payload) {
       state.keeps = payload
     }, 
-    setVault(state, payload) {
+    setVaults(state, payload) {
       state.Vault = payload
     },
   },
@@ -86,5 +86,53 @@ export default new Vuex.Store({
         console.error(error) 
       }
     }, 
+    async createKeep({ dispatch }, payload) {
+      try {
+        let res = await api.post('/keeps', payload)
+        dispatch('getKeeps')
+      } catch (error) {
+        console.error(error)
+      }
+    }, 
+    async createVault({ dispatch }, payload) { 
+      try {
+        let res = await api.post('/Vaults', payload)
+        dispatch('getVaults')
+      } catch (error) {
+        console.error(error) 
+      }
+    },
+    async editKeeep({ dispatch }, payload) {
+      try {
+        let res = await api.put('/keeps', payload) 
+        dispatch('getKeeps') 
+      } catch (error) {
+        console.error(error) 
+      }
+    },
+    async editVault({ dispatch }, payload) {
+      try {
+        let res = await api.put('/Vaults', payload) 
+        dispatch('getVaults') 
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteKeep({ dispatch }, payload) {
+      try {
+        let res = await api.delete('/keeps', payload) 
+        dispatch('getKeeps')
+      } catch (error) {
+        console.error(error) 
+      }
+    }, 
+    async deleteVault({ dispatch }, payload) {
+      try {
+        let res = await api.delete('/Vaults', payload)
+        dispatch('getVaults')
+      } catch (error) {
+        console.error(error) 
+      }
+    }
   }
 })
