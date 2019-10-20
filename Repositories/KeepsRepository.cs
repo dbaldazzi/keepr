@@ -1,51 +1,71 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Data;
+using Dapper;
 using Keepr.Models;
 
 namespace Keepr.Repositories
 {
-    public class KeepsRepository 
-    {
+  public class KeepsRepository
+  {
     private readonly IDbConnection _db;
     public KeepsRepository(IDbConnection db)
     {
       _db = db;
     }
 
-    internal System.Collections.Generic.IEnumerable<Keep> Get(int id)
+    public IEnumerable<Keep> Get()
     {
-      throw new NotImplementedException();
+      string sql = "SELECT * FROM keeps";
+      return _db.Query<Keep>(sql);
     }
 
-    internal System.Collections.Generic.IEnumerable<Keep> Get()
+    public Keep Get(int id)
     {
-      throw new NotImplementedException();
+      string sql = "SELECT * FROM keeps";
+      return _db.QueryFirstOrDefault<Keep>(sql);
     }
 
-    internal IEnumerable GetKeep(int v, int id)
+    public Keep Get(string name)
     {
-      throw new NotImplementedException();
+      string sql = "SELECT * FROM keeps WHERE name = @name";
+      return _db.QueryFirstOrDefault<Keep>(sql, new { name });
     }
 
-    internal int Create(object newKeep)
+    public int Create(Keep newKeep)
     {
-      throw new NotImplementedException();
+      string sql = @"
+      INSERT INTO keeps
+      (name, description);
+      VALUE
+      (@Name, @Description)
+      SELECT LAST_INSERT_ID();";
+      return _db.ExecuteScalar<int>(sql, newKeep);
     }
 
-    internal Keep Get(object name)
+    public void Edit(Keep keep)
     {
-      throw new NotImplementedException();
+      string sql = @"
+      UPDATE keeps
+      SET
+        name =@Name,
+        description = @Description,
+        WHERE id = @Id";
+      _db.Execute(sql, keep);
     }
 
-    internal void Edit(Keep keep)
+    public void Delete(int id)
     {
-      throw new NotImplementedException();
+      string sql = "DELETE FROM keeps WHERE id = @id";
+      _db.Execute(sql, new { id });
     }
 
-    internal void Delete(int id)
+    public IEnumerable<Keep> GetKeepsByVaultId(int id)
     {
-      throw new NotImplementedException();
+      string sql = "SELECT * FROM keeps WHERE keepId = @id";
+      return _db.Query<Keep>(sql, new { id });
     }
+
   }
 }

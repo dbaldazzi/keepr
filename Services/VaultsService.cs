@@ -35,10 +35,21 @@ namespace keepr.Services
       return newVault;
     }
     public Vault Edit(Vault editVault)
-    { 
-    if (Vault == null) {throw new Exception("Invalid Id"); }
-    vault.Name == editVault.Name; 
-}
+    {
+      Vault vault = _repo.Get(editVault.Id); 
+      if (vault == null) {throw new Exception("Invalid Id"); }
+    vault.name = editVault.name;
+      vault.description = editVault.description;
+      _repo.edit(vault);
+      return vault; 
+    }
+    public string Delete(int id) 
+    {
+      Vault exists = _repo.Get(id);
+      if (exists == null) { throw new Exception("Invalid Id"); }
+      _repo.Delete(id);
+      return "Deleted"; 
+    }
 }
 }
 
