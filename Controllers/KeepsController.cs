@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Keepr.Controllers
 {
   [ApiController]
-  [Route("api/[contgroller]")]
+  [Route("api/[controller]")]
 
   public class KeepsController : ControllerBase
   {
