@@ -16,7 +16,14 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    keep: {},
+    keeps: [], 
+    Vault: {}, 
+    shares: {},
+    views: {}, 
+
+
   },
   mutations: {
     setUser(state, user) {
@@ -25,8 +32,15 @@ export default new Vuex.Store({
     resetState(state) {
       //clear the entire state object of user data
       state.user = {}
-    }
+    },
+    setKeeps(state, payload) {
+      state.keeps = payload
+    }, 
+    setVault(state, payload) {
+      state.Vault = payload
+    },
   },
+
   actions: {
     async register({ commit, dispatch }, creds) {
       try {
@@ -55,6 +69,22 @@ export default new Vuex.Store({
       } catch (e) {
         console.warn(e.message)
       }
-    }
+    }, 
+    async getkeeps({ commit, dispatch }) {
+      try { 
+        let res = await api.get('keeps')
+        commit('setKeeps', res.data)
+      } catch (error) {
+        console.error(error) 
+      }
+    }, 
+    async getVaults({ commit, dispatch }) {
+      try {
+        let res = await api.get('vaults')
+        commit('setVaults', res.data)
+      } catch (error) {
+        console.error(error) 
+      }
+    }, 
   }
 })
