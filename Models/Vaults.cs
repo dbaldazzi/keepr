@@ -4,7 +4,7 @@ using Keepr.interfaces;
 namespace Keepr.models
 {
 
-  public class Vaults : IVaults
+  public class Vault : IVaults
   {
     public int id { get ; set ; }
     public string name { get ; set ; }

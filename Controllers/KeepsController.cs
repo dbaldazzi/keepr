@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using keepr.Services;
+using Keepr.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ namespace Keepr.Controllers
       _ks = ks;
     }
     [HttpGet]
-    public ActionResult<IEnumerable<Keeps>> Get()
+    public ActionResult<IEnumerable<Keep>> Get()
     {
       try
       {

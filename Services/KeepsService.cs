@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Keepr.Models;
 using Keepr.Repositories;
 
 namespace keepr.Services
@@ -30,20 +31,20 @@ namespace keepr.Services
 
     // }
 
-   public Keep Create(Keep newkeeps)
+   public Keep Create(Keep newkeep)
     {
-      Keep keep = _repo.Get(newkeeps.Name);
+      Keep keep = _repo.Get(newkeep.name);
       if (keep != null) { throw new Exception("Keep already exists"); }
-      int id = _repo.Create(newkeeps);
-      newkeeps.Id = id;
-      return new Keep; 
+      int id = _repo.Create(newkeep);
+      newkeep.Id = id;
+      return newkeep;
     }
 
     public Keep Edit(Keep editKeep)
     {
       Keep keep = _repo.Get(editKeep.Id);
       if (keep == null) { throw new Exception("Invalid Id"); }
-      keep.Name = editKeep.Name;
+      keep.name = editKeep.name;
       keep.Description = editKeep.Description;
       keep.Img = editKeep.Img;
       keep.IsPrivate = editKeep.IsPrivate;
