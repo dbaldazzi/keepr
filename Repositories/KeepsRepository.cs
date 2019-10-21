@@ -23,8 +23,8 @@ namespace Keepr.Repositories
 
     public Keep Get(int id)
     {
-      string sql = "SELECT * FROM keeps";
-      return _db.QueryFirstOrDefault<Keep>(sql);
+      string sql = "SELECT * FROM keeps WHERE id = @id";
+      return _db.QueryFirstOrDefault<Keep>(sql, new {id});
     }
 
     public Keep Get(string name)
@@ -51,7 +51,7 @@ namespace Keepr.Repositories
       SET
         name = @Name,
         description = @Description, 
-        img = @img,
+        img = @img
         WHERE id = @Id";
       _db.Execute(sql, keep);
     }
