@@ -21,3 +21,17 @@ export default {
   }
 };
 </script>
+
+<style scoped> 
+
+.home {
+  background-color: blue; 
+  width: 100vw;
+  height: 15vh; 
+  margin-left: 0px; 
+  padding-left: 0px; 
+}
+h1 {
+  color: white; 
+}
+</style> 

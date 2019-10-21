@@ -50,3 +50,11 @@
         }
     };
 </script>
+
+<style scoped>
+.login {
+    background-color: blue;
+    height: 15vh; 
+    color: white; 
+}
+</style>
