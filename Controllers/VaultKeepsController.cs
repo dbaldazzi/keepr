@@ -11,9 +11,45 @@ namespace Keepr.Controllers
     {
 private readonly VaultKeepsService _vks; 
 
-public VaultKeepsController(VaultsKeepsService vks)
+public VaultKeepsController(VaultKeepsService vks)
 {
       _vks = vks;
+    }
+    [HttpGet]
+    public ActionResult<IEnumerable<VaultKeeps>> Get() 
+    {
+try 
+{
+        return Ok(_vks.Get()); 
+      }
+      catch (Exception e) 
+      {
+        return BadRequest(e.Message); 
+      }
+    }
+    [HttpPost]
+    public ActionResult<VaultKeeps> Create([FromBody] VaultKeeps newVaultKeeps)
+    {
+      try 
+      {
+        return Ok(_vks.Post(newVaultKeeps));
+      }
+      catch (Exception e) 
+      {
+        return BadRequest(e.Message); 
+      }
+    }
+    [HttpDelete("{id}")]
+    public ActionResult<string> Delete(int id) 
+    {
+      try 
+      {
+        return Ok(_vks.Delete(id)); 
+      }
+      catch (Exception e) 
+      {
+        return BadRequest(e.Message); 
+      }
     }
   }
 }
