@@ -37,9 +37,9 @@ namespace Keepr.Repositories
     {
       string sql = @"
       INSERT INTO keeps
-      (name, description);
-      VALUE
-      (@Name, @Description)
+      (name, description, img)
+      VALUES
+      (@Name, @Description, @img);
       SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newKeep);
     }
@@ -49,8 +49,9 @@ namespace Keepr.Repositories
       string sql = @"
       UPDATE keeps
       SET
-        name =@Name,
-        description = @Description,
+        name = @Name,
+        description = @Description, 
+        img = @img,
         WHERE id = @Id";
       _db.Execute(sql, keep);
     }

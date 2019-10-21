@@ -8,7 +8,7 @@ namespace Keepr.interfaces
 
       string description { get; set; }
 
-    string userid { get; set; }
+    // string userid { get; set; }
 
       int views { get; set; }
 

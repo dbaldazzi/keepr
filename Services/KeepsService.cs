@@ -34,8 +34,8 @@ namespace keepr.Services
 
     public Keep Create(Keep newkeep)
     {
-      Keep keep = _repo.Get(newkeep.name);
-      if (keep != null) { throw new Exception("Keep already exists"); }
+      // Keep keep = _repo.Get(newkeep.name);
+      // if (keep != null) { throw new Exception("Keep already exists"); }
       int id = _repo.Create(newkeep);
       newkeep.Id = id;
       return newkeep;

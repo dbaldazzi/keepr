@@ -16,7 +16,7 @@ namespace Keepr.Models
     public int shares { get ; set ; }
     public int keeps { get ; set ; }
     public object Img { get; set; }
-    public string userid { get; set; }
+    // public string userid { get; set; }
     string IKeeps.Img { get; set; }
   }
 }
