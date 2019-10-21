@@ -3,7 +3,8 @@ namespace Keepr.interfaces
 
   public interface IVaults
   {
-    int id { get; set; }
+    // int id { get; set; }
+    int Id { get; set; }
 
     string name { get; set; }
 
