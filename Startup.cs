@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using keepr.Repositories;
 using keepr.Services;
 using Keepr.Repositories;
+using Keepr.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +27,7 @@ namespace Keepr
       Configuration = configuration;
     }
 
-    public IConfiguration Configuration { get; }
+            public IConfiguration Configuration { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
@@ -65,6 +66,8 @@ namespace Keepr
       services.AddTransient<keepsService>();
       services.AddTransient<VaultsRepository>();
       services.AddTransient<VaultsService>();
+      services.AddTransient<VaultKeepsRepository>();
+      services.AddTransient<VaultKeepsService>(); 
 
 
     }

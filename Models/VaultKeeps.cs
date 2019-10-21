@@ -6,5 +6,7 @@ namespace Keepr.Models
    {
      public int vaultId { get; set; }
     public int keepId { get; set; }
+
+    public int Id { get; set; }
   }
   } 

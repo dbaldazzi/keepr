@@ -1,54 +1,57 @@
 using System;
 using System.Collections.Generic;
+using Keepr.Models;
+using Keepr.Services;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace Keepr.Controllers
 {
 
   [ApiController]
   [Route("api/[controller]")]
-    public class VaultKeepsController : ControllerBase
-    {
-private readonly VaultKeepsService _vks; 
+  public class VaultKeepsController : ControllerBase
+  {
+    private readonly VaultKeepsService _vks;
 
-public VaultKeepsController(VaultKeepsService vks)
-{
+    public VaultKeepsController(VaultKeepsService vks)
+    {
       _vks = vks;
     }
     [HttpGet]
-    public ActionResult<IEnumerable<VaultKeeps>> Get() 
+    public ActionResult<IEnumerable<VaultKeeps>> Get()
     {
-try 
-{
-        return Ok(_vks.Get()); 
-      }
-      catch (Exception e) 
+      try
       {
-        return BadRequest(e.Message); 
+        return Ok(_vks.Get());
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
       }
     }
     [HttpPost]
     public ActionResult<VaultKeeps> Create([FromBody] VaultKeeps newVaultKeeps)
     {
-      try 
+      try
       {
         return Ok(_vks.Post(newVaultKeeps));
       }
-      catch (Exception e) 
+      catch (Exception e)
       {
-        return BadRequest(e.Message); 
+        return BadRequest(e.Message);
       }
     }
     [HttpDelete("{id}")]
-    public ActionResult<string> Delete(int id) 
+    public ActionResult<string> Delete(int id)
     {
-      try 
+      try
       {
-        return Ok(_vks.Delete(id)); 
+        return Ok(_vks.Delete(id));
       }
-      catch (Exception e) 
+      catch (Exception e)
       {
-        return BadRequest(e.Message); 
+        return BadRequest(e.Message);
       }
     }
   }

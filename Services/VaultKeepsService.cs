@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
-using keepr.Repositories;
+using Keepr.Models;
 using Keepr.Repositories;
 
-namespace Keepr.VaultKeepsService
+namespace Keepr.Services
 {
+
   public class VaultKeepsService
   {
-    private readonly VaultsKeepsRepository _repo;
+    private readonly VaultKeepsRepository _repo;
 
     private readonly KeepsRepository _keepsRepo;
-    public VaultKeepsService(VaultsKeepsRepository repo, KeepsRepository KeepsRepo)
+    public VaultKeepsService(VaultKeepsRepository repo, KeepsRepository KeepsRepo)
     {
       _keepsRepo = KeepsRepo;
       _repo = repo;
@@ -32,6 +33,11 @@ namespace Keepr.VaultKeepsService
       if (vaultKeeps == null) { throw new Exception("Invalid Id"); }
       _repo.Delete(id);
       return "Successfully Deleted";
+    }
+
+    internal object Post(VaultKeeps newVaultKeeps)
+    {
+      throw new NotImplementedException();
     }
   }
 }

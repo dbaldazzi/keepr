@@ -4,5 +4,6 @@ namespace keepr.Interfaces
     {
         int vaultId { get; set; }
         int keepId { get; set;  }
+        int Id { get; set;  }
   }
 }
