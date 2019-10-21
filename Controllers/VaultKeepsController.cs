@@ -35,7 +35,7 @@ namespace Keepr.Controllers
     {
       try
       {
-        return Ok(_vks.Post(newVaultKeeps));
+        return Ok(_vks.Create(newVaultKeeps));
       }
       catch (Exception e)
       {

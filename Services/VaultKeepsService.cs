@@ -34,10 +34,5 @@ namespace Keepr.Services
       _repo.Delete(id);
       return "Successfully Deleted";
     }
-
-    internal object Post(VaultKeeps newVaultKeeps)
-    {
-      throw new NotImplementedException();
-    }
   }
 }
