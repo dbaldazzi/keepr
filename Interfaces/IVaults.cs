@@ -1,4 +1,4 @@
-namespace Keepr
+namespace Keepr.interfaces
 {
 
   public interface IVaults

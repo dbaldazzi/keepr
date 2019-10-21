@@ -43,6 +43,12 @@ namespace keepr.Services
       _repo.edit(vault);
       return vault; 
     }
+
+    internal object GetVault(int id)
+    {
+      throw new NotImplementedException();
+    }
+
     public string Delete(int id) 
     {
       Vault exists = _repo.Get(id);

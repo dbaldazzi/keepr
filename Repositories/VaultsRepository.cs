@@ -10,8 +10,6 @@ namespace keepr.Repositories
     public class VaultsRepository
     {
     private readonly IDbConnection _db;
-    private object id;
-
     public VaultsRepository(IDbConnection db) 
     {
       _db = db; 
@@ -40,7 +38,7 @@ namespace keepr.Repositories
       (name, description, userid) 
       VALUES 
       (@Name, @Description, @Userid);
-      SELECT LAST_INSET_ID();";
+      SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newVault);
     }
     public void edit(Vault vault)
@@ -48,15 +46,11 @@ namespace keepr.Repositories
       string sql = @"
       UPDATE vaults
       SET
-        name = @Name
-        description = @Description
-        Where id = @ID";
-      _db.Execute(sql, new { id }); 
-    }
-
-    internal void edit(object vault)
-    {
-      throw new NotImplementedException();
+        name = @Name,
+        description = @Description,
+        userId = @UserId
+        WHERE id = @ID";
+      _db.Execute(sql, vault); 
     }
 
     public void Delete(int id) 
