@@ -72,29 +72,29 @@ namespace Keepr.Controllers
 
     public ActionResult<Keep> Edit([FromBody] Keep editKeep)
     {
-      try 
+      try
       {
-        return Ok(_ks.Edit(editKeep)); 
-        }
-        catch (Exception e)
-        {
-        return BadRequest(e.Message); 
-      }
-      }
-    [Authorize]
-    [HttpDelete("{id}")]
-
-    public ActionResult<string> Delete(int id) 
-{
-  try 
-  {
-        return Ok(_ks.Delete(id)); 
+        return Ok(_ks.Edit(editKeep));
       }
       catch (Exception e)
       {
-        return BadRequest(e.Message); 
+        return BadRequest(e.Message);
       }
-}
     }
+    [Authorize]
+    [HttpDelete("{id}")]
+
+    public ActionResult<string> Delete(int id)
+    {
+      try
+      {
+        return Ok(_ks.Delete(id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+  }
 }
 

@@ -48,7 +48,7 @@ namespace keepr.Services
       
       if (keep == null) { throw new Exception("Invalid Id"); }
       keep.name = editKeep.name;
-      keep.Description = editKeep.Description;
+      keep.description = editKeep.description;
       keep.Img = editKeep.Img;
       _repo.Edit(keep);
       return keep;
