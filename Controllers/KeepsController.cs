@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using keepr.Services;
 using Keepr.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -60,6 +61,7 @@ namespace Keepr.Controllers
     {
       try
       {
+        newkeep.UserId = HttpContext.User.FindFirstValue("Id");
         return Ok(_ks.Create(newkeep));
       }
       catch (Exception e)

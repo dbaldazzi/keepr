@@ -20,5 +20,7 @@ namespace Keepr.interfaces
 
       string Img { get; set; }
 
+      string UserId { get; set; }
+
   }
 }

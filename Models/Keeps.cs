@@ -18,8 +18,7 @@ namespace Keepr.Models
     public int keeps { get ; set ; }
     public object Img { get; set; }
     public int VaultId { get; set; }
-
-    // public string userid { get; set; }
+    public string UserId { get;  set; }
     string IKeeps.Img { get; set; }
   }
 }
