@@ -42,6 +42,20 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
+    // [HttpGet]
+    // public ActionResult<Keep> Get(Keep newKeep) 
+    // {
+    //   try
+    //   {
+    //       newKeep.UserId = HttpContext.User.FindFirstValue("id"); 
+    //     return Ok(_ks.Get(newKeep));
+    //   }
+    //   catch (Exception e) 
+    //   {
+    //     return BadRequest(e.Message); 
+    //   }
+    // }
+
     [HttpGet("{id}/keep")]
     public ActionResult<IEnumerable<Keep>> GetKeep(int id)
     {

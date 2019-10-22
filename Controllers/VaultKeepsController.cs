@@ -66,6 +66,7 @@ namespace Keepr.Controllers
     {
       try 
       {
+        newVaultKeeps.UserId = HttpContext.User.FindFirstValue("Id");
         newVaultKeeps.Id = id; 
         return Ok(_vks.Edit(newVaultKeeps)); 
       }

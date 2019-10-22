@@ -11,6 +11,7 @@ namespace keepr.Services
   public class keepsService
   {
     private readonly KeepsRepository _repo;
+
     public keepsService(KeepsRepository repo)
     {
       _repo = repo;
@@ -26,21 +27,14 @@ namespace keepr.Services
       if (exists == null) { throw new Exception("invalid Id"); }
       return exists; 
     }
-    // public Keep GetKeeps(int id)
-    // {
-    //   return _repo.GetKeeps(int id);
-
-    // }
 
     public Keep Create(Keep newkeep)
     {
-      // Keep keep = _repo.Get(newkeep.name);
-      // if (keep != null) { throw new Exception("Keep already exists"); }
+
       int id = _repo.Create(newkeep);
       newkeep.Id = id;
       return newkeep;
     }
-    // private readonly Keep editKeep;
 
     public Keep Edit(Keep editKeep)
     {
@@ -54,15 +48,28 @@ namespace keepr.Services
       return keep;
     }
 
+    public Keep GetKeepByUserId(int userId)
+    {
+      Keep exists = _repo.Get(userId);
+      if (exists == null) { throw new Exception("Invalid Id"); }
+      return exists; 
+    }
+
+    internal object Get(object userId)
+    {
+      throw new NotImplementedException();
+    }
+
+    internal object GetKeepByUserId(object userId)
+    {
+      throw new NotImplementedException();
+    }
+
     internal object GetKeep(int id)
     {
       throw new NotImplementedException();
     }
 
-    // internal object GetKeep(int id)
-    // {
-    //   throw new NotImplementedException();
-    // }
 
     public string Delete(int id)
     {

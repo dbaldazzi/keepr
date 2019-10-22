@@ -54,11 +54,7 @@ namespace Keepr.Repositories
       _db.Execute(sql, vaultKeeps);
     }
 
-    public VaultKeeps Get(object id)
-    {
-      throw new NotImplementedException();
-    }
-
+   
   
   }
 }

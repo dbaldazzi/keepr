@@ -62,11 +62,6 @@ namespace Keepr.Repositories
       _db.Execute(sql, new { id });
     }
 
-    public IEnumerable<Keep> GetKeepsByVaultId(int id)
-    {
-      string sql = "SELECT * FROM keeps WHERE keepId = @id";
-      return _db.Query<Keep>(sql, new { id });
-    }
-
+    
   }
 }

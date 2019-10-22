@@ -59,7 +59,7 @@ namespace Keepr
 
       services.AddMvc();
 
-      services.AddScoped<IDbConnection>(x => CreateDBContext());
+      services.AddScoped<IDbConnection>(x => CreateDBConnection());
       services.AddTransient<AccountRepository>();
       services.AddTransient<AccountService>();
       services.AddTransient<KeepsRepository>();
@@ -72,7 +72,8 @@ namespace Keepr
 
     }
 
-    private IDbConnection CreateDBContext()
+
+    private IDbConnection CreateDBConnection()
     {
       var _connectionString = Configuration.GetSection("DB").GetValue<string>("gearhost");
       var connection = new MySqlConnection(_connectionString);
