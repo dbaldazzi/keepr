@@ -43,7 +43,7 @@ namespace Keepr.Repositories
       _db.Execute(sql, new { id });
     }
 
-    internal void Edit(VaultKeeps vaultKeeps)
+    public void Edit(VaultKeeps vaultKeeps)
     {
       string sql = @"
       UPDATE vaultKeeps
@@ -53,5 +53,12 @@ namespace Keepr.Repositories
       WHERE Id = @id";
       _db.Execute(sql, vaultKeeps);
     }
+
+    public VaultKeeps Get(object id)
+    {
+      throw new NotImplementedException();
+    }
+
+  
   }
 }

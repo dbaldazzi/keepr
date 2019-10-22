@@ -52,5 +52,13 @@ namespace Keepr.Services
       _repo.Delete(id);
       return "Successfully Deleted";
     }
+
+    // internal object Delete(VaultKeeps newVaultKeeps)
+    // {
+    //   VaultKeeps vaultKeeps = _repo.Get(id);
+    //   if (vaultKeeps == null) { throw new Exception("Invalid Id"); }
+    //   _repo.Delete(id);
+    //   return "succefully Deleted"; 
+    // }
   }
 }
