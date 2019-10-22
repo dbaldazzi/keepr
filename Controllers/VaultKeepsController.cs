@@ -2,16 +2,21 @@ using System;
 using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+
 
 
 namespace Keepr.Controllers
 {
-
+  
   [ApiController]
   [Route("api/[controller]")]
+   
   public class VaultKeepsController : ControllerBase
   {
+    
     private readonly VaultKeepsService _vks;
 
     public VaultKeepsController(VaultKeepsService vks)
@@ -32,6 +37,7 @@ namespace Keepr.Controllers
     }
     [HttpPost]
     public ActionResult<VaultKeeps> Create([FromBody] VaultKeeps newVaultKeeps)
+    
     {
       try
       {

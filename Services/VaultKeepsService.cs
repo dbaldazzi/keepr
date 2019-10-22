@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc; 
+
 
 namespace Keepr.Services
 {
