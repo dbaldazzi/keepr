@@ -34,6 +34,19 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
+    [HttpGet("{id}")]
+    public ActionResult<VaultKeeps> Get(int id) 
+{
+  try 
+  {
+        return Ok(_vks.Get(id)); 
+      }
+      catch (Exception e) 
+      {
+        return BadRequest(e.Message); 
+      }
+}
+
     [HttpPost]
     public ActionResult<VaultKeeps> Create([FromBody] VaultKeeps newVaultKeeps)
     
@@ -48,11 +61,28 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
+    [HttpPut("{id}")]
+    public ActionResult<VaultKeeps> Edit([FromBody] VaultKeeps newVaultKeeps, int id)
+    {
+      try 
+      {
+        newVaultKeeps.Id = id; 
+        return Ok(_vks.Edit(newVaultKeeps)); 
+      }
+      catch (Exception e) 
+      {
+        return BadRequest(e.Message); 
+      }
+    }
+
     [HttpDelete("{id}")]
-    public ActionResult<string> Delete(int id)
+    public ActionResult<string> Delete(int id, VaultKeeps newVaultKeeps)
     {
       try
       {
+        newVaultKeeps.UserId = HttpContext.User.FindFirstValue("Id");
+        newVaultKeeps.VaultId = HttpContext.User.FindFirstValue("VaultId"); 
+        newVaultKeeps.KeepId = HttpContext.User.FindFirstValue("KeepId");
         return Ok(_vks.Delete(id));
       }
       catch (Exception e)

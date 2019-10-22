@@ -1,11 +1,10 @@
-namespace keepr.Interfaces 
+namespace keepr.Interfaces
 {
-    public interface IVaultKeeps
-    {
-        int vaultId { get; set; }
-        int keepId { get; set;  }
-        int Id { get; set;  }
-
-        string UserId { get; set;  }
+  public interface IVaultKeeps
+  {
+    int Id { get; set; }
+    string UserId { get; set; }
+    string VaultId { get; set; }
+    string KeepId { get; set; }
   }
 }

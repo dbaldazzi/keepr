@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace Keepr.Services
@@ -24,11 +24,26 @@ namespace Keepr.Services
     {
       return _repo.Get();
     }
+    public VaultKeeps Get(int id)
+    {
+      VaultKeeps exists = _repo.Get(id);
+      if (exists == null) { throw new Exception("Invalid Id"); }
+      return exists;
+    }
     public VaultKeeps Create(VaultKeeps newVaultKeeps)
     {
       int id = _repo.Create(newVaultKeeps);
       newVaultKeeps.Id = id;
       return newVaultKeeps;
+    }
+    public VaultKeeps Edit(VaultKeeps newData)
+    {
+      VaultKeeps vaultKeeps = _repo.Get(newData.Id);
+      if (vaultKeeps == null) { throw new Exception("Invalid Id"); }
+      vaultKeeps.VaultId = newData.VaultId;
+      vaultKeeps.KeepId = newData.KeepId;
+      _repo.Edit(vaultKeeps);
+      return vaultKeeps;
     }
     public string Delete(int id)
     {
