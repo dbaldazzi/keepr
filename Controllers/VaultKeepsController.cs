@@ -5,8 +5,7 @@ using Keepr.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-
-
+using System.Security.Claims;
 
 namespace Keepr.Controllers
 {
@@ -41,6 +40,7 @@ namespace Keepr.Controllers
     {
       try
       {
+        newVaultKeeps.UserId = HttpContext.User.FindFirstValue("Id");
         return Ok(_vks.Create(newVaultKeeps));
       }
       catch (Exception e)
