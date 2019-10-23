@@ -46,7 +46,18 @@ namespace Keepr.Controllers
         return BadRequest(e.Message); 
       }
 }
-
+[HttpGet("{vaultId}/vaultKeeps")]
+public ActionResult<IEnumerable<VaultKeeps>> GetVaultKeep(VaultKeeps VaultId) 
+{
+  try 
+  {
+        return Ok(_vks.Get(VaultId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message); 
+      }
+}
     [HttpPost]
     public ActionResult<VaultKeeps> Create([FromBody] VaultKeeps newVaultKeeps)
     

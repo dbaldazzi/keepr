@@ -48,28 +48,12 @@ namespace keepr.Services
       return keep;
     }
 
-    public Keep GetKeepByUserId(int userId)
+    public Keep Get(string id)
     {
-      Keep exists = _repo.Get(userId);
-      if (exists == null) { throw new Exception("Invalid Id"); }
+      Keep exists = _repo.Get(id);
+      if (exists == null) { throw new Exception("invalid Id"); }
       return exists; 
     }
-
-    internal object Get(object userId)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal object GetKeepByUserId(object userId)
-    {
-      throw new NotImplementedException();
-    }
-
-    internal object GetKeep(int id)
-    {
-      throw new NotImplementedException();
-    }
-
 
     public string Delete(int id)
     {

@@ -29,12 +29,24 @@ namespace Keepr.Services
       VaultKeeps exists = _repo.Get(id);
       if (exists == null) { throw new Exception("Invalid Id"); }
       return exists;
-    }
-    public VaultKeeps Create(VaultKeeps newVaultKeeps)
+    } 
+    // public VaultKeeps GetVaultKeeps(string id)
+    // {
+    //   VaultKeeps exists = _repo.Get(id);
+    //   if (exists == null) { throw new Exception("Invalid Id"); }
+    //   return exists;
+    // }
+    public VaultKeeps Create(VaultKeeps newData)
     {
-      int id = _repo.Create(newVaultKeeps);
-      newVaultKeeps.Id = id;
-      return newVaultKeeps;
+      int id = _repo.Create(newData);
+      newData.Id = id;
+      return newData;
+    }
+    public VaultKeeps Get(VaultKeeps vaultId)
+    {
+      VaultKeeps exists = _repo.Get(vaultId);
+      if (exists == null) { throw new Exception("Invalid Id"); }
+      return exists; 
     }
     public VaultKeeps Edit(VaultKeeps newData)
     {
@@ -45,6 +57,9 @@ namespace Keepr.Services
       _repo.Edit(vaultKeeps);
       return vaultKeeps;
     }
+
+    
+
     public string Delete(int id)
     {
       VaultKeeps vaultKeeps = _repo.Get(id);

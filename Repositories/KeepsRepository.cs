@@ -24,22 +24,22 @@ namespace Keepr.Repositories
     public Keep Get(int id)
     {
       string sql = "SELECT * FROM keeps WHERE id = @id";
-      return _db.QueryFirstOrDefault<Keep>(sql, new {id});
+      return _db.QueryFirstOrDefault<Keep>(sql, new { id });
     }
 
-    public Keep Get(string name)
+    public Keep Get(string User)
     {
-      string sql = "SELECT * FROM keeps WHERE name = @name";
-      return _db.QueryFirstOrDefault<Keep>(sql, new { name });
+      string sql = "SELECT * FROM keeps WHERE userId = @userId";
+      return _db.QueryFirstOrDefault<Keep>(sql, new { User });
     }
 
     public int Create(Keep newKeep)
     {
       string sql = @"
       INSERT INTO keeps
-      (name, description, img)
+      (name, description, img, userId)
       VALUES
-      (@Name, @Description, @img);
+      (@Name, @Description, @img, @userId);
       SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newKeep);
     }
@@ -62,6 +62,6 @@ namespace Keepr.Repositories
       _db.Execute(sql, new { id });
     }
 
-    
+
   }
 }
