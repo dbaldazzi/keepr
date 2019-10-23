@@ -23,7 +23,7 @@ namespace Keepr.Controllers
       _vks = vks;
     }
     [HttpGet]
-    public ActionResult<IEnumerable<VaultKeeps>> Get()
+    public ActionResult<VaultKeeps> Get()
     {
       try
       {
@@ -35,29 +35,30 @@ namespace Keepr.Controllers
       }
     }
     [HttpGet("{id}")]
-    public ActionResult<VaultKeeps> Get(int id) 
+    public ActionResult <IEnumerable<Keep>> Get(int id, Keep newData) 
 {
   try 
   {
-        return Ok(_vks.Get(id)); 
+        newData.UserId = HttpContext.User.FindFirstValue("Id");
+        return Ok(_vks.Get(newData)); 
       }
       catch (Exception e) 
       {
         return BadRequest(e.Message); 
       }
 }
-[HttpGet("{vaultId}/vaultKeeps")]
-public ActionResult<IEnumerable<VaultKeeps>> GetVaultKeep(VaultKeeps VaultId) 
-{
-  try 
-  {
-        return Ok(_vks.Get(VaultId));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message); 
-      }
-}
+// [HttpGet("{id}")]
+// public ActionResult<IEnumerable<VaultKeeps>> Get(VaultKeeps VaultId) 
+// {
+//   try 
+//   {
+//         return Ok(_vks.Get(VaultId));
+//       }
+//       catch (Exception e)
+//       {
+//         return BadRequest(e.Message); 
+//       }
+// }
     [HttpPost]
     public ActionResult<VaultKeeps> Create([FromBody] VaultKeeps newVaultKeeps)
     
@@ -72,35 +73,35 @@ public ActionResult<IEnumerable<VaultKeeps>> GetVaultKeep(VaultKeeps VaultId)
         return BadRequest(e.Message);
       }
     }
-    [HttpPut("{id}")]
-    public ActionResult<VaultKeeps> Edit([FromBody] VaultKeeps newVaultKeeps, int id)
-    {
-      try 
-      {
-        newVaultKeeps.UserId = HttpContext.User.FindFirstValue("Id");
-        newVaultKeeps.Id = id; 
-        return Ok(_vks.Edit(newVaultKeeps)); 
-      }
-      catch (Exception e) 
-      {
-        return BadRequest(e.Message); 
-      }
-    }
+    // [HttpPut("{id}")]
+    // public ActionResult<VaultKeeps> Edit([FromBody] VaultKeeps newVaultKeeps, int id)
+    // {
+    //   try 
+    //   {
+    //     newVaultKeeps.UserId = HttpContext.User.FindFirstValue("Id");
+    //     newVaultKeeps.Id = id; 
+    //     return Ok(_vks.Edit(newVaultKeeps)); 
+    //   }
+    //   catch (Exception e) 
+    //   {
+    //     return BadRequest(e.Message); 
+    //   }
+    // }
 
-    [HttpDelete("{id}")]
-    public ActionResult<string> Delete(int id, VaultKeeps newVaultKeeps)
-    {
-      try
-      {
-        newVaultKeeps.UserId = HttpContext.User.FindFirstValue("Id");
-        newVaultKeeps.VaultId = HttpContext.User.FindFirstValue("VaultId"); 
-        newVaultKeeps.KeepId = HttpContext.User.FindFirstValue("KeepId");
-        return Ok(_vks.Delete(id));
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
+    // [HttpDelete("{id}")]
+    // public ActionResult<string> Delete(int id, VaultKeeps newVaultKeeps)
+    // {
+    //   try
+    //   {
+    //     newVaultKeeps.UserId = HttpContext.User.FindFirstValue("Id");
+    //     newVaultKeeps.VaultId = HttpContext.User.FindFirstValue("VaultId"); 
+    //     newVaultKeeps.KeepId = HttpContext.User.FindFirstValue("KeepId");
+    //     return Ok(_vks.Delete(id));
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
   }
 }

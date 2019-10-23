@@ -20,16 +20,16 @@ namespace Keepr.Repositories
       string sql = "SELECT * FROM vaultKeeps";
       return _db.Query<VaultKeeps>(sql);
     }
-    public VaultKeeps Get(int id)
+    public IEnumerable<Keep> Get(int vaultId, string newData)
     {
-      string sql = "SELECT * FROM vaultKeeps WHERE id = @id";
-      return _db.QueryFirstOrDefault<VaultKeeps>(sql, new { id });
+      string sql = @"SELECT * FROM vaults v INNER JOIN keeps K on K.id = VaultKeeps.keepId WHERE (VaultId = @VaultId AND vk.userId = @userId)";
+      return _db.Query<Keep>(sql, new { vaultId });
     }
-    internal VaultKeeps Get(VaultKeeps vaultId)
-    {
-      string sql = "SELECT * FROM vaultkeeps where vaultId = @vaultId";
-      return _db.QueryFirstOrDefault<VaultKeeps>(sql, new { vaultId });
-    }
+    // public VaultKeeps Get(VaultKeeps vaultId)
+    // {
+    //   string sql = "SELECT * FROM vaultkeeps where vaultId = @vaultId";
+    //   return _db.QueryFirstOrDefault<VaultKeeps>(sql, new { vaultId });
+    // }
 // public VaultKeeps GetVaultKeeps(VaultKeeps VaultId)
 //     {
 //       string sql = "SELECT * FROM vaultKeeps WHERE vaultId = @vaultId";
