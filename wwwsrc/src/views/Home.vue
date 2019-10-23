@@ -1,8 +1,10 @@
 <template>
   <div class="home">
     <h1>Welcome Home {{user.username}}</h1>
+    <button class="btn btn-primary"><router-link to="/Keeps">Keeps</router-link></button> 
+    <button class="btn btn-primary"><router-link to="/vault">Vault</router-link></button> 
     <button v-if="user.id" @click="logout">logout</button>
-    <router-link v-else :to="{name: 'login'}">Login</router-link>
+    <router-link v-else :to="{name: 'login'}">Login</router-link> 
   <div class="container-fluid"> 
     <div class="row">    
   <keep v-for="keep in keeps" :keepprop="keep" :key="keep.id" />
@@ -44,6 +46,9 @@ export default {
 </script>
 
 <style scoped> 
+.router {
+  color: white; 
+}
 
 .home {
   background-color: blue; 
